@@ -1,0 +1,207 @@
+:root {
+  --bg-color: #181818; /* Dark background for high contrast, but not pitch black */
+  --node-color: #30343f2e; /* Dark gray for nodes, with a neutral tone */
+  --node-outline: #444b586d; /* Slightly lighter gray for borders */
+  --start-color: #4caf50; /* Start: Fresh Green */
+  --finish-color: #ff7043; /* Finish: Warm Coral */
+  --visited-color-start: #8e99f3; /* Start of path: Soft Blue */
+  --visited-color-mid: #6094e0; /* Mid-path: Muted Sky Blue */
+  --visited-color-end: #4972e4; /* End of path: Deep Blue */
+  --wall-color: #bc6640; /* Wall: Subtle Beige Brown */
+  --shortest-path-color: #ffeb3b; /* Shortest Path: Vibrant Yellow */
+
+  --btn-text-light: #ffffff; /* Button Text: White */
+  --btn-text-dark: #212121; /* Button Text: Almost Black */
+  --btn-bg-danger: #f44336; /* Danger Button: Bold Red */
+  --btn-bg-warning: #ff9800; /* Warning Button: Amber */
+  --btn-bg-primary: #3f51b5; /* Primary Button: Indigo */
+  --btn-bg-light: #607d8b; /* Light Button: Slate Gray */
+  --btn-bg-dark: #212121; /* Dark Button: Black */
+  
+  --btn-border-danger: #f44336;
+  --btn-border-warning: #ff9800;
+  --btn-border-primary: #3f51b5;
+  --btn-border-light: #607d8b;
+  --btn-border-dark: #212121;
+}
+
+body {
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #ffffff78;
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.node {
+  border: 0.4px dashed transparent;
+  width: 30px;
+  height: 30px;
+  outline: 1px solid var(--node-outline);
+  display: inline-block;
+  background-color: var(--node-color);
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.visited-nodes-count {
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 48px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff78;
+}
+
+.node-start {
+  background-color: var(--start-color);
+  animation: pulseStart 1.5s infinite ease-in-out;
+}
+
+.node-finish {
+  background-color: var(--finish-color);
+  animation: pulseFinish 1.5s infinite ease-in-out;
+}
+
+.node-wall {
+  background-color: #cd404078;
+}
+
+.node-visited {
+  animation-name: visitedAnimation;
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  animation-fill-mode: forwards;
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(0.3);
+    opacity: 1;
+    background-color: var(--visited-color-start);
+    border-radius: 50%;
+  }
+  50% {
+    background-color: var(--visited-color-mid);
+  }
+  100% {
+    transform: scale(1);
+    border: 0.4px dashed var(--visited-color-end);
+  }
+}
+
+.node-shortest-path {
+  animation-name: shortestPath;
+  animation-duration: 1.2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes shortestPath {
+  0% {
+    transform: scale(0.6);
+    background-color: var(--shortest-path-color);
+    box-shadow: 0 0 15px 5px rgba(255, 235, 59, 0.6);
+  }
+  40% {
+    transform: scale(1);
+  }
+  100% {
+    background-color: var(--shortest-path-color);
+    box-shadow: 0 0 10px 2px rgba(255, 235, 59, 0.3);
+  }
+}
+
+@keyframes pulseStart {
+  0% {
+    background-color: var(--start-color);
+  }
+  50% {
+    background-color: #388e3c;
+  }
+  100% {
+    background-color: var(--start-color);
+  }
+}
+
+@keyframes pulseFinish {
+  0% {
+    background-color: var(--finish-color);
+  }
+  50% {
+    background-color: #f57c00;
+  }
+  100% {
+    background-color: var(--finish-color);
+  }
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 2px solid transparent;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 50px; /* Smooth rounded edges for a modern button look */
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out, box-shadow 0.2s ease;
+}
+
+.btn-danger {
+  color: var(--btn-text-light);
+  background-color: var(--btn-bg-danger);
+  border-color: var(--btn-border-danger);
+}
+
+.btn-warning {
+  color: var(--btn-text-dark);
+  background-color: var(--btn-bg-warning);
+  border-color: var(--btn-border-warning);
+}
+
+.btn-primary {
+  color: var(--btn-text-light);
+  background-color: var(--btn-bg-primary);
+  border-color: var(--btn-border-primary);
+}
+
+.btn-light {
+  color: var(--btn-text-dark);
+  background-color: var(--btn-bg-light);
+  border-color: var(--btn-border-light);
+  box-shadow: 0 4px 12px rgba(96, 125, 139, 0.4);
+}
+
+.btn-dark {
+  color: var(--btn-text-light);
+  background-color: var(--btn-bg-dark);
+  border-color: var(--btn-border-dark);
+  box-shadow: 0 4px 12px rgba(33, 33, 33, 0.4);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.button-container button {
+  margin: 0 12px;
+}
